@@ -5,6 +5,8 @@
     hyprpaper
   ];
 
+  programs.hyprlock.enable = true;
+
   wayland.windowManager.hyprland = {
     enable = true;
     package = null;
@@ -29,6 +31,7 @@
         "$mod, F, exec, $fileManager"
         "$mod, W, exec, firefox"
         "$mod, D, exec, wofi --show run"
+        "$mod, L, exec, hyprlock"
         ",XF86MonBrightnessDown, exec, brightnessctl s 10%-"
         ",XF86MonBrightnessUp, exec, brightnessctl s +10%"
         ",XF86AudioLowerVolume, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02-"
