@@ -32,6 +32,18 @@
     ];
   };
 
+  hardware.bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      settings = {
+          General = {
+              Experimental = true;
+          };
+      };
+  };
+
+  services.blueman.enable = true;
+
   time.timeZone = "Europe/Warsaw";
 
   i18n.defaultLocale = "en_US.UTF-8";
