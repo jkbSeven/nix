@@ -16,7 +16,16 @@
 
 
 
-    boot.loader.systemd-boot.enable = true;
+    boot.loader.systemd-boot.enable = false;
+    boot.loader.grub = {
+        enable = true;
+        device = "/dev/vda";
+    };
+    boot.kernelPackages = pkgs.linuxPackages_latest;
+
+    fileSystems."/" = {
+        fsType = "ext4";
+    };
 
     networking.hostName = hostname;
 
