@@ -42,8 +42,6 @@
       };
   };
 
-  services.blueman.enable = true;
-
   time.timeZone = "Europe/Warsaw";
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -89,6 +87,8 @@
     git
     firefox
     wireguard-tools
+
+    bluetui # TUI for bluetooth mgmt
   ];
 
   environment.localBinInPath = true;
