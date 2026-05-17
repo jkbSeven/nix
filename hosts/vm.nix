@@ -1,10 +1,6 @@
 { config, pkgs, hostname, lib, ... }:
 
 {
-    imports = [
-        ../modules/proxmox-vm.nix
-    ];
-
     system.stateVersion = "25.11";
 
     nix.settings.experimental-features = [
@@ -14,21 +10,31 @@
 
     nixpkgs.config.allowUnfree = true;
 
+    boot.kernelPackages = pkgs.linuxPackages_latest;
+
+    boot.initrd.availableKernelModules = [
+        "virtio_pci"
+        "virtio_scsi"
+        "virtio_blk"
+    ];
+
     boot.loader.systemd-boot.enable = false;
     boot.loader.grub = {
         enable = true;
         device = "/dev/vda";
     };
-    boot.kernelPackages = pkgs.linuxPackages_latest;
 
-    fileSystems."/" = {
-        fsType = "ext4";
+    services.qemuGuest.enable = true;
+
+    virtualisation.diskSize = 8192;  # in MiB
+
+    proxmox.qemuConf = {
+        cores = 4;
+        memory = 8192;  # in MiB
     };
 
     networking.hostName = hostname;
-    networking.networkmanager = {
-        enable = true;
-    };
+    networking.networkmanager.enable = true;
 
     time.timeZone = "Europe/Warsaw";
     i18n.defaultLocale = "en_US.UTF-8";

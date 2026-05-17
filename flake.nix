@@ -40,6 +40,7 @@
 
           modules = [
             ./hosts/vm.nix
+            "${nixpkgs}/nixos/modules/virtualisation/proxmox-image.nix"
           ];
         };
 
